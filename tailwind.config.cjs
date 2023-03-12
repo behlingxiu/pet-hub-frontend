@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: ['./src/**/*.{html,js,svelte,ts}',"./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}"],
   theme: {
     colors: {
       'rose100' : '#ffe4e6',
@@ -19,5 +19,8 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [require('flowbite/plugin'), require("daisyui")],
+  daisyui: {
+    themes: false,
+  },
 }
