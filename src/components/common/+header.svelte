@@ -28,11 +28,11 @@
 
 
 
- <nav class="bg-rose200 border-gray-200 dark:bg-rose200">
+ <nav class="bg-rose200 font-shantell-sans font-mono border-gray-200 dark:bg-rose200">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-        <a href="https://flowbite.com" class="flex items-center">
+        <a href="#" class="flex items-center">
             <img src="https://cdn-icons-png.flaticon.com/512/1581/1581594.png" class="h-6 mr-3 sm:h-9" alt="Logo" />
-            <span class="self-center text-xxl font-semibold whitespace-nowrap dark:text-white">PAWS</span>
+            <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">PAWS</span>
         </a>
         <form class="flex items-center">   
             <label for="simple-search" class="sr-only">Search</label>
@@ -48,8 +48,8 @@
             </button>
         </form>
         <div class="flex items-center">
-            <a href="#" class="mr-6 text-sm font-medium text-gray-500 dark:text-white hover:underline">Login</a>
-            <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Cart</a>
+            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm">Login</a>
+            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm">Cart</a>
         </div>
     </div>
 </nav>
