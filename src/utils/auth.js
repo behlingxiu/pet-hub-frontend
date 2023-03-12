@@ -6,7 +6,7 @@ export const loggedIn = writable(false);
 
 const emptyAuth = {
   "token": "",
-  "userId": ""
+  "user": ""
 }
 
 export function logOut() {
@@ -16,10 +16,10 @@ export function logOut() {
 }
 
 // ignore this first, in case for future use
-export function getUserId() {
+export function getUser() {
   const auth = localStorage.getItem("auth")
   if (auth) {
-    return JSON.parse(auth)["userId"]
+    return JSON.parse(auth)["user"]
   }
   return null
 }
@@ -56,7 +56,7 @@ export async function isLoggedIn() {
 
       localStorage.setItem("auth", JSON.stringify({
         "token": res.accessToken,
-        "userId": res.userId,
+        "user": res.user,
       }));
       loggedIn.set(true)
       return true
@@ -71,7 +71,7 @@ export async function isLoggedIn() {
 
 export async function authenticateUser(email, password) {
   const resp = await fetch(
-    PUBLIC_BASE_URL + '/auth/signIn',
+    PUBLIC_BASE_URL + '/signIn',
     {
       method: 'POST',
       mode: 'cors',
@@ -86,11 +86,11 @@ export async function authenticateUser(email, password) {
   );
 
   const res = await resp.json();
-
+    console.log(res)
   if (resp.status == 200) {
     localStorage.setItem("auth", JSON.stringify({
       "token": res.accessToken,
-      "userId": res.userId,
+      "user": res.user,
     }));
     loggedIn.set(true)
     return {
@@ -101,6 +101,7 @@ export async function authenticateUser(email, password) {
   loggedIn.set(false)
   return {
     success: false,
+    status: resp.status,
     res: res
   }
 }

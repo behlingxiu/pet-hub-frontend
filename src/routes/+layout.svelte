@@ -1,16 +1,10 @@
 <script>
 
     import "../app.css";
-    import AuthModal from "../components/AuthModal.svelte";
-    
+    import Header from "../components/common/+header.svelte";
+    import Footer from "../components/common/+footer.svelte";
 </script>
 
-<AuthModal/>
-<main style="font-family: 'Hind', sans-serif;">
-    <slot />
-</main>
-
-    
-        
-    
-    
+<Header />
+<slot />
+<Footer />
