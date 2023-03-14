@@ -58,9 +58,7 @@ import {authenticateUser, loggedIn} from '../utils/auth'
                 loggedIn.set(true)
             } else {
                 const res = await resp.json();
-                console.log(res)
                 formErrors = res.error
-                console.log(formErrors)
             }
             
         } 
@@ -75,6 +73,7 @@ import {authenticateUser, loggedIn} from '../utils/auth'
             const resp = await authenticateUser(userData.email, userData.password)
             isLoading=false
             if (resp.success === true) {
+                evt.target.reset()
                 isModalOpen = false
             } else {
                 if (resp.status === 400){

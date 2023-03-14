@@ -15,7 +15,6 @@ export function logOut() {
   return true
 }
 
-// ignore this first, in case for future use
 export function getUser() {
   const auth = localStorage.getItem("auth")
   if (auth) {

@@ -1,16 +1,25 @@
 <script>
     import AuthModal from "../AuthModal.svelte";
-    import {loggedIn, logOut} from '../../utils/auth'
+    import {getUser, loggedIn, logOut} from '../../utils/auth'
 	import {goto} from '$app/navigation'
+	import { afterUpdate } from "svelte";
+    import User from "../../assets/user.svelte";
 	
 	const signOut = () => {
 		logOut()
 		goto('/')
 	}
+    let user = '';
+
+    afterUpdate(() => {
+		if ($loggedIn) {
+            user = getUser()
+        }
+	});
+
 </script>
 
 <AuthModal/>
-
  <nav class="bg-rose200 font-shantell-sans font-mono border-gray-200 dark:bg-rose200">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
         <a href="#" class="flex items-center">
@@ -32,11 +41,22 @@
         </form>
         <div class="flex items-center">
             {#if $loggedIn}
-            <button on:click={signOut} class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm">Log Out</button>
+            <div class="dropdown dropdown-hover dropdown-end">
+                <button class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"/></button>
+                <ul class="dropdown-content menu shadow bg-base-100 rounded-box w-52">
+                    <li class="text-transform: uppercase bg-rose400 px-4 py-3 text-white font-semibold">{user.name}</li>
+                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">Go to my account</a></li>
+                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/2630/2630085.png">My orders</a></li>
+                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/7387/7387315.png">My listings</a></li>
+                    <li class="border-y-2"><button on:click={signOut}><img class="h-4" style="filter: invert(21%) sepia(91%) saturate(6843%) hue-rotate(358deg) brightness(98%) contrast(98%);" src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png">Log out</button></li>
+                </ul>
+            </div>
             {:else}
-            <label for="my-modal-4" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm">Login</label>
+            <div class="tooltip tooltip-bottom" data-tip="Login / Create Account">
+                <label for="my-modal-4" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"/></label>
+            </div>
             {/if}
-            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm">Cart</a>
+            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" /></a>
         </div>
     </div>
 </nav>
