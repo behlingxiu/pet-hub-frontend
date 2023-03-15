@@ -7,7 +7,8 @@ module.exports = {
       'rose200' : '#fecdd3',
       'rose300' : '#fda4af',
       'rose400' : '#fb7185',
-      'gray100' : '#f3f4f6'
+      'gray100' : '#f3f4f6',
+      'black100': 'rgba(0,0,0,0.3)'
     },
     fontFamily:{
       'climate-crisis' : 'Climate Crisis',
