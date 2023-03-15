@@ -1,9 +1,62 @@
+<style>
+    #listing1 .list{
+        width: 23%;
+        min-width: 250px;
+        padding: 10px 12px;
+        border: 1px solid #e8dee5;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+        margin: 15px 0px;
+        transition: 0.2s ease;
+    }
+
+    #listing1 .list:hover{
+        box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
+
+    }
+
+
+    #listing1 .list img{
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    #listing1 .list .description{
+        text-align: start;
+        padding: 10px 0;
+    }
+
+    #listing1 .list .description span{
+        color: #838391;
+        font-size: 12px;
+    }
+
+    #listing1 .list .description h5{
+        padding-top: 4px;
+        padding-bottom: 4px;
+        color: black;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    #listing1 .list .description .price{
+        padding-top: 4px;
+        padding-bottom: 4px;
+        color: rgb(210, 133, 133);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+
+</style>
+
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
 
     // let isModalOpen = false
-    let listingTab = false
+    let listingTab = true
     let orderTab = false
-    let accountTab = true
+    let accountTab = false
 
 
 const handleTab = (action) => {
@@ -79,10 +132,32 @@ const handleTab = (action) => {
 
             </div>
                 {#if listingTab}
-                <div class="container lg:mt-10 px-2 lg:px-0 mx-auto">
                 
-                    This is a listing Tab
-                </div>
+                  <div id="listing1" class="p-10">
+                    <div class="list-container">
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <a href="#"><button type="button" class="grid justify-center text-gray-900 bg-rose100 border border-gray-300 focus:outline-none hover:bg-rose300 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add to Cart</button>
+                            </a>                               
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+                  
+                  
+                
                 {/if}
         
                 {#if orderTab}
