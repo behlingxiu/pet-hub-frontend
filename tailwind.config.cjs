@@ -16,7 +16,9 @@ module.exports = {
       'pacifico' : 'Pacifico',
       'rokkitt' : 'Rokkitt',
       'shantell-sans' : 'Shantell Sans',
-      'titan-one' : 'Titan One'
+      'titan-one' : 'Titan One',
+      'roboto' : 'Roboto',
+      'open-sans' : 'Open Sans'
     },
     extend: {},
   },
