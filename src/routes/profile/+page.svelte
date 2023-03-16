@@ -1,4 +1,13 @@
 <style>
+
+    #listing1 .list-container{
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+        flex-wrap: wrap;
+
+    }
+
     #listing1 .list{
         width: 23%;
         min-width: 250px;
@@ -47,15 +56,20 @@
         font-size: 20px;
         font-weight: 700;
     }
-
+    
+    #order img{
+        width: 15%;
+        border-radius: 20px;
+        padding: 20px 20px;
+    }
 
 </style>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
 
     // let isModalOpen = false
-    let listingTab = true
-    let orderTab = false
+    let listingTab = false
+    let orderTab = true
     let accountTab = false
 
 
@@ -147,9 +161,128 @@ const handleTab = (action) => {
                                     <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
                                 </div>
                                 <div class="price">RM28</div> 
-                            <a href="#"><button type="button" class="grid justify-center text-gray-900 bg-rose100 border border-gray-300 focus:outline-none hover:bg-rose300 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Add to Cart</button>
-                            </a>                               
-                            
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="list font-roboto">
+                            <img src="https://tmbidigitalassetsazure.blob.core.windows.net/rms3-prod/attachments/37/1200x1200/Pumpkin-Ginger-Dog-Biscuits_EXPS_PCBZ18_227406_B04_26_1b.jpg" alt="dog cookie bone shape">
+                            <div class="description">
+                                <span class="grid justify-items-end pr-4">dog</span>
+                                <h5>Bone shape dog cookies</h5>
+                                <div class="flex items-center">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-xs text-gray-900 dark:text-white pr-4">4.95</p>
+                                    <!-- <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span> -->
+                                    <a href="#" class="text-xs font-medium text-gray-900 underline hover:no-underline dark:text-white">73 reviews</a>
+                                </div>
+                                <div class="price">RM28</div> 
+                            <div class="flex justify-end">
+                                <a href="#" class=" border-rose200 text-gray-500 dark:text-white hover:bg-rose300 btn right-btn bg-rose100 rounded-full mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="cart icon"/></a>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -161,31 +294,119 @@ const handleTab = (action) => {
                 {/if}
         
                 {#if orderTab}
-                <div class="container mt-20 md: px-2 lg:px-0 mx-auto">
-                
-                    This is a order tab
+                <div id="order">
+                    <div class="heading">
+                        <h1 class="w-full flex item-center justify-center text-3xl py-8">Order History</h1>
+                    </div>
+                    <div class="order-container font-roboto">
+                        <div class="order-table">
+                            <div class="table-head w-full bg-rose100 border border-gray-200 rounded-lg grid md:grid-cols-3">
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Order number</span>
+                                    <span class="font-light text-gray-500">ABC1234</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Date placed</span>
+                                    <span class="font-light text-gray-500">15 March, 2023</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Total amount</span>
+                                    <span class="font-light text-gray-500">RM50.90</span>
+                                </div>
+                            </div>
+                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://www.tasteofhome.com/wp-content/uploads/2018/12/Peanut-Butter-Dog-Treats.-Coconut-Oil-Dog-Treats.-Live-Laugh-Rowe.jpg" alt="">
+                                <div class="w-full flex justify-between">
+                                    <div>
+                                        <div class="px-5 font-bold text-l">Paws shape cookies</div>
+                                        <div class="px-5 font-light text-gray-500">seller's name</div>
+                                    </div>
+                                    <div>Quantity : 1</div>
+                                    <div class="px-10">RM20.90</div>
+                                </div>
+                            </div>
+                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://i.pinimg.com/originals/f4/e3/17/f4e31741fb9dcb50372a942665c407a4.jpg" alt="">
+                                <div class="w-full flex justify-between">
+                                    <div>
+                                        <div class="px-5 font-bold text-l">dog shape cookies</div>
+                                        <div class="px-5 font-light text-gray-500">seller's name</div>
+                                    </div>
+                                    <div>Quantity : 1</div>
+                                    <div class="px-10">RM15.00</div>
+                                </div>
+                            </div>
+                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://i.pinimg.com/originals/e2/49/0d/e2490d950b13f90a747c7e4ff6212c8a.jpg" alt="">
+                                <div class="w-full flex justify-between">
+                                    <div>
+                                        <div class="px-5 font-bold text-l">cat shape cookies</div>
+                                        <div class="px-5 font-light text-gray-500">seller's name</div>
+                                    </div>
+                                    <div>Quantity : 1</div>
+                                    <div class="px-10">RM15.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-container font-roboto pt-10">
+                        <div class="order-table">
+                            <div class="table-head w-full bg-rose100 border border-gray-200 rounded-lg grid md:grid-cols-3">
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Order number</span>
+                                    <span class="font-light text-gray-500">ABC1232</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Date placed</span>
+                                    <span class="font-light text-gray-500">10 March, 2023</span>
+                                </div>
+                                <div class="flex flex-col items-center justify-center py-4">
+                                    <span class="text-xl font-bold">Total amount</span>
+                                    <span class="font-light text-gray-500">RM60.00</span>
+                                </div>
+                            </div>
+                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://www.cake2therescue.com.au/wp-content/uploads/2020/05/caviler-king-charles-dog-birthday-cake-kit-cake-2-the-rescue.jpg" alt="">
+                                <div class="w-full flex justify-between">
+                                    <div>
+                                        <div class="px-5 font-bold text-l">Dog birthday cake</div>
+                                        <div class="px-5 font-light text-gray-500">seller's name</div>
+                                    </div>
+                                    <div>Quantity : 1</div>
+                                    <div class="px-10">RM30.00</div>
+                                </div>
+                            </div>
+                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://boulderlocavore.com/wp-content/uploads/2015/03/How-to-Make-a-Grumpy-Cat-Cake-BoulderLocavore.com-986.jpg" alt="">
+                                <div class="w-full flex justify-between">
+                                    <div>
+                                        <div class="px-5 font-bold text-l">Cat birthday cake</div>
+                                        <div class="px-5 font-light text-gray-500">seller's name</div>
+                                    </div>
+                                    <div>Quantity : 1</div>
+                                    <div class="px-10">RM30.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 {/if}
 
                 {#if accountTab}
                 
-                <div class="bg-white p-3 shadow-sm rounded-sm">
-                    <div class="relative flex items-center space-x-4 pb-6 pt-6 font-semibold text-gray-900 leading-8">
-                        <span clas="text-green-500">
-                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                <div class="bg-white p-3 shadow-sm rounded-sm ">
+                    <div class="w-full flex justify-around items-center space-x-4 pb-6 pt-6 font-semibold text-gray-900 leading-8">
+                        
+                        <span class="flex tracking-wide text-2xl">
+                            General Information
                         </span>
-                        <span class="tracking-wide">General Information</span>
-                        <div class="absolute top-5 right-0">
+                        <div class="">
                                 <!-- <span class="bg-rose300 rounded text-white">EDIT</span> -->
                                 <button type="button" class="text-white bg-rose300 hover:bg-rose100 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">EDIT</button>
                         </div>
                     </div>
                     
-                    <div class="text-gray-700">
+                    <div class="text-gray-700 border pt-10">
                         <!-- <div>
                             <div class="px-4 py-2 pb-1 font-semibold">Profile Picture</div>
                             <img class="object-scale-down h-48 w-45 px-4 py-2 pt-0"
@@ -194,8 +415,8 @@ const handleTab = (action) => {
                         </div> -->
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Name</div>
-                                <div class="px-4 py-2 pt-0">John Dog</div>
+                                <div class="px-4 py-2 pb-1 pl-10 font-semibold">Name</div>
+                                <div class="px-4 py-2 pt-0 pl-10">John Dog</div>
                             </div>
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold">Email</div>
@@ -204,24 +425,24 @@ const handleTab = (action) => {
                                 </div>
                             </div>
                             <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Password</div>
-                                <div class="px-4 py-2 pt-0">********</div>
+                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Password</div>
+                                <div class="px-4 py-2 pt-0 pl-10">********</div>
                             </div>
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold">Birthday</div>
                                 <div class="px-4 py-2 pt-0">Feb 06, 1998</div>
                             </div>
                             <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Gender</div>
-                                <div class="px-4 py-2 pt-0">Female</div>
+                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Gender</div>
+                                <div class="px-4 py-2 pt-0 pl-10">Female</div>
                             </div>
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold">Contact No.</div>
                                 <div class="px-4 py-2 pt-0">+60123456789</div>
                             </div>
                             <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Description</div>
-                                <div class="px-4 py-2 pt-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quas nulla repellendus assumenda vitae dolor neque quia id quidem hic facere illo accusamus tempore consequuntur esse, repellat aut reiciendis omnis.</div>
+                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Description</div>
+                                <div class="px-4 py-2 pt-0 pl-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quas nulla repellendus assumenda vitae dolor neque quia id quidem hic facere illo accusamus tempore consequuntur esse, repellat aut reiciendis omnis.</div>
                             </div>
                         </div>
                     </div>
