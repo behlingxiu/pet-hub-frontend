@@ -78,7 +78,7 @@ const handleTab = (action) => {
               
             </div>
             <!-- Right Side -->
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div class="w-full md:w-9/12 mx-2">
                 
                 
                 <!-- Profile tab -->
@@ -99,7 +99,7 @@ const handleTab = (action) => {
                 {/if}
         
                 {#if orderTab}
-                <div id="order" class="mb-80">
+                <div id="order">
                     <div class="heading">
                         <h1 class="w-full flex item-center justify-center text-3xl py-8">Order History</h1>
                     </div>
