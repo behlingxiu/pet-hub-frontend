@@ -12,16 +12,15 @@
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
     import { page } from '$app/stores'
-    const account = $page.url.searchParams.has('account')
-    const listing = $page.url.searchParams.has('listings')
-    const order = $page.url.searchParams.has('orders')
-    console.log(account)
-    console.log(listing)
-    console.log(order)
-    // let isModalOpen = false
-    let listingTab = listing
-    let orderTab = order
-    let accountTab = account
+    import { afterNavigate} from '$app/navigation'
+    let listingTab = false
+    let orderTab = false
+    let accountTab = true
+    afterNavigate(() => { 
+        accountTab = $page.url.searchParams.has('account')
+        listingTab = $page.url.searchParams.has('listings')
+        orderTab = $page.url.searchParams.has('orders')
+    })
 
 
 const handleTab = (action) => {
