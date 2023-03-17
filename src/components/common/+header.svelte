@@ -22,7 +22,7 @@
 <AuthModal/>
  <nav class="bg-rose200 font-shantell-sans font-mono border-gray-200 dark:bg-rose200">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
-        <a href="#" class="flex items-center">
+        <a href="/" class="flex items-center">
             <img src="https://cdn-icons-png.flaticon.com/512/1581/1581594.png" class="h-6 mr-3 sm:h-9" alt="Logo" />
             <span class="self-center text-3xl font-semibold whitespace-nowrap dark:text-white">PAWS</span>
         </a>
@@ -45,9 +45,9 @@
                 <button class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"/></button>
                 <ul class="dropdown-content menu shadow bg-base-100 rounded-box w-52">
                     <li class="text-transform: uppercase bg-rose400 px-4 py-3 text-white font-semibold">{user.name}</li>
-                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">Go to my account</a></li>
-                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/2630/2630085.png">My orders</a></li>
-                    <li><a href="#"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/7387/7387315.png">My listings</a></li>
+                    <li><a href="/profile?account"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">Go to my account</a></li>
+                    <li><a href="/profile?orders"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/2630/2630085.png">My orders</a></li>
+                    <li><a href="/profile?listings"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/7387/7387315.png">My listings</a></li>
                     <li class="border-y-2"><button on:click={signOut}><img class="h-4" style="filter: invert(21%) sepia(91%) saturate(6843%) hue-rotate(358deg) brightness(98%) contrast(98%);" src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png">Log out</button></li>
                 </ul>
             </div>

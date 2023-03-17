@@ -1,14 +1,14 @@
 <script>
     import { goto } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
-    import { getTokenFromLocalStorage } from '../../utils/auth'
-    import { uploadMedia } from '../../utils/s3-uploader.js'
+    import { getTokenFromLocalStorage } from '../../../utils/auth'
+    import { uploadMedia } from '../../../utils/s3-uploader'
     import Icon from 'svelte-icon/Icon.svelte';
-    import trash from '../../assets/trash.svg?raw'
-	import AuthModal from '../../components/AuthModal.svelte';
-	import Footer from '../../components/common/+footer.svelte';
-	import Header from '../../components/common/+header.svelte';
-	import Layout from '../+layout.svelte';
+    import trash from '../../../assets/trash.svg?raw'
+	// import AuthModal from '../../components/AuthModal.svelte';
+	// import Footer from '../../components/common/+footer.svelte';
+	// import Header from '../../components/common/+header.svelte';
+	// import Layout from '../+layout.svelte';
 
     let input;
     let images = [];
@@ -19,6 +19,7 @@
             goto('/');
         }
 
+        //go to my listing page
 
 async function createProduct(evt) {
     evt.preventDefault()

@@ -15,15 +15,22 @@
 </style>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
-	import { getTokenFromLocalStorage } from "../../utils/auth";
-
-
-
-    // let isModalOpen = false
+    import { page } from '$app/stores'
+    import { afterNavigate} from '$app/navigation'
     let listingTab = false
-    let purchaseHistoryTab = true
-    let accountTab = false
     let orderTab = false
+    let accountTab = false
+    let purchaseHistoryTab = false
+    afterNavigate(() => { 
+        accountTab = $page.url.searchParams.has('account')
+        listingTab = $page.url.searchParams.has('listings')
+        orderTab = $page.url.searchParams.has('orders')
+        purchaseHistoryTab = $page.url.searchParams.has('purchase')
+
+        if (accountTab === false && listingTab === false && orderTab === false && purchaseHistoryTab === false){
+            listingTab = true
+        }
+    })
 
 
 const handleTab = (action) => {
