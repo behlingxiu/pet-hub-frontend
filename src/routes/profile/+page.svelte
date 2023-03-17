@@ -1,36 +1,52 @@
 <style>
 
-   
+   #mylisting img{
+    width: 25%;
+    border-radius: 5px;
+    margin-right: 30px;
+   }
     
-    #order img{
-        width: 15%;
-        border-radius: 20px;
-        padding: 20px 20px;
-    }
+   #purchaseHistory img{
+    width: 25%;
+    border-radius: 5px;
+    margin-right: 30px;
+   }
 
 </style>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
+	import { getTokenFromLocalStorage } from "../../utils/auth";
+
+
 
     // let isModalOpen = false
     let listingTab = false
-    let orderTab = true
+    let purchaseHistoryTab = true
     let accountTab = false
+    let orderTab = false
 
 
 const handleTab = (action) => {
             if (action === 'listing'){
                 listingTab = true;
-                orderTab = false
+                purchaseHistoryTab = false
                 accountTab = false
-            } else if (action === 'order'){
-                orderTab = true;
+                orderTab = false
+            } else if (action === 'purchaseHistory'){
+                purchaseHistoryTab = true;
                 listingTab = false
                 accountTab = false
+                orderTab = false
             } else if (action === 'account'){
                 accountTab = true;
                 listingTab = false
+                purchaseHistoryTab = false
                 orderTab = false
+            } else if (action === 'order'){
+                accountTab = false;
+                listingTab = false
+                purchaseHistoryTab = false
+                orderTab = true
             }
              
 }
@@ -78,30 +94,121 @@ const handleTab = (action) => {
               
             </div>
             <!-- Right Side -->
-            <div class="w-full md:w-9/12 mx-2 h-64">
+            <div class="w-full md:w-9/12 mx-2">
                 
                 
                 <!-- Profile tab -->
 
 
             <div class="tabs font-shantell-sans">
-                <button on:click={() => handleTab('listing')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (listingTab ? " tab-active" : " bg-rose100")}>Listing</button> 
-                <button on:click={() => handleTab('order')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (orderTab ? " tab-active" : " bg-rose100")}>My Order</button> 
-                <button on:click={() => handleTab('account')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (accountTab ? " tab-active" : " bg-rose100")}>My Account</button> 
+                <button on:click={() => handleTab('listing')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (listingTab ? " tab-active" : " bg-rose100")}>My Listing</button> 
+                <button on:click={() => handleTab('purchaseHistory')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (purchaseHistoryTab ? " tab-active" : " bg-rose100")}>Purchased History</button> 
+                <button on:click={() => handleTab('order')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (orderTab ? " tab-active" : " bg-rose100")}>My Orders</button> 
+                <button on:click={() => handleTab('account')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (accountTab ? " tab-active" : " bg-rose100")}>My Account</button> 
+
 
             </div>
                 {#if listingTab}
+
+                <div class="heading">
+                    <h1 class="w-full flex item-center justify-center text-3xl py-8">My Listing</h1>
+                </div>
                 
-                  <div>This is a listing tab</div>
+                <div id="mylisting" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-sm  text-gray-700 uppercase bg-rose100">
+                            <tr>
+                                <th scope="col" class="px-6 py-5">
+                                    Product Info
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Stock
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                    Cat cookie 123
+                                </th>
+                                <td class="px-6 py-4">
+                                    cat
+                                </td>
+                                <td class="px-6 py-4">
+                                    12
+                                </td>
+                                <td class="px-6 py-4">
+                                    RM10
+                                </td>
+                                <td class="px-6 py-4 text-left">
+                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+
+                                </td>
+                            </tr>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                        Cat cookie 123
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        cat
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        12
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        RM10
+                                    </td>
+                                    <td class="px-6 py-4 text-left">
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+    
+                                    </td>
+                                </tr>
+                                <tbody>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            <img src="https://images.notquitenigella.com/images/dog-cookies-easy/__doggy-cookies-12.jpg" alt="">
+                                            dog cookie 123
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            dog
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            20
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            RM12
+                                        </td>
+                                        <td class="px-6 py-4 text-left">
+                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                   
                   
                 
                 {/if}
         
-                {#if orderTab}
-                <div id="order" class="mb-80">
+                {#if purchaseHistoryTab}
+                <!-- <div id="order" class="mb-80">
                     <div class="heading">
-                        <h1 class="w-full flex item-center justify-center text-3xl py-8">Order History</h1>
+                        <h1 class="w-full flex item-center justify-center text-3xl py-8">Purchased History</h1>
                     </div>
                     <div class="order-container font-roboto">
                         <div class="order-table">
@@ -142,7 +249,7 @@ const handleTab = (action) => {
                                 </div>
                             </div>
                             <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://i.pinimg.com/originals/e2/49/0d/e2490d950b13f90a747c7e4ff6212c8a.jpg" alt="">
+                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
                                 <div class="w-full flex justify-between">
                                     <div>
                                         <div class="px-5 font-bold text-l">cat shape cookies</div>
@@ -194,15 +301,127 @@ const handleTab = (action) => {
                             </div>
                         </div>
                     </div>
+                </div> -->
+
+                <div class="heading">
+                    <h1 class="w-full flex item-center justify-center text-3xl py-8">Purchase History</h1>
                 </div>
+                
+                <div id="purchaseHistory" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg my-">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-sm text-gray-700 uppercase bg-rose100">
+                            <tr class="">
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Order number</div>
+                                    <div> ABC1234</div>
+                                </th>
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Dated placed</div>
+                                    <div> 15 March, 2023</div>
+                                </th>
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Total amount</div>
+                                    <div> RM20.00</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                    Cat cookie 123
+                                </th>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    Quantity : 1
+                                </td>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    RM20.00
+                                </td>
+                            </tr>
+                            <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="purchaseHistory" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg my-3">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-sm text-gray-700 uppercase bg-rose100">
+                            <tr class="">
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Order number</div>
+                                    <div> ABC1234</div>
+                                </th>
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Dated placed</div>
+                                    <div> 15 March, 2023</div>
+                                </th>
+                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                    <div class="text-base font-semibold ">Total amount</div>
+                                    <div> RM20.00</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                    Cat cookie 123
+                                </th>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    Quantity : 1
+                                </td>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    RM20.00
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                    Cat cookie 123
+                                </th>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    Quantity : 1
+                                </td>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    RM20.00
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                    Cat cookie 123
+                                </th>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    Quantity : 1
+                                </td>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                    RM20.00
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                        
+                  
+                {/if}
+
+                {#if orderTab}
+                
+                <div>This is a order tab</div>            
+                  
+                
                 {/if}
 
                 {#if accountTab}
                 
                 <div class="bg-white p-3 shadow-sm rounded-sm ">
-                    <div class="w-full flex justify-around items-center space-x-4 pb-6 pt-6 font-semibold text-gray-900 leading-8">
+                    <div class="w-full flex justify-around items-center space-x-4 pb-6 pt-6 text-gray-900 leading-8">
                         
-                        <span class="flex tracking-wide text-2xl">
+                        <span class="flex tracking-wide text-3xl">
                             General Information
                         </span>
                         <div class="">
