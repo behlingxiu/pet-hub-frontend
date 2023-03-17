@@ -11,11 +11,17 @@
 </style>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
-
+    import { page } from '$app/stores'
+    const account = $page.url.searchParams.has('account')
+    const listing = $page.url.searchParams.has('listings')
+    const order = $page.url.searchParams.has('orders')
+    console.log(account)
+    console.log(listing)
+    console.log(order)
     // let isModalOpen = false
-    let listingTab = false
-    let orderTab = true
-    let accountTab = false
+    let listingTab = listing
+    let orderTab = order
+    let accountTab = account
 
 
 const handleTab = (action) => {
