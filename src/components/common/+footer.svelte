@@ -1,6 +1,6 @@
 
 
-<style>
+<!-- <style>
     #footer {
             position: fixed;
             padding: 10px 10px 0px 10px;
@@ -9,7 +9,7 @@
             /* Height of the footer*/
             height: 100px;
         }
-</style>
+</style> -->
 
 
 <footer id="footer" class="mt-20 py-10 bg-rose200 font-shantell-sans border-gray-200 dark:bg-rose200">
