@@ -48,6 +48,7 @@
                     <li><a href="/profile?account"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/747/747376.png">Go to my account</a></li>
                     <li><a href="/profile?orders"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/2630/2630085.png">My orders</a></li>
                     <li><a href="/profile?listings"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/7387/7387315.png">My listings</a></li>
+                    <li><a href="/profile?purchase"><img class="h-4" style="filter: invert(89%) sepia(69%) saturate(2655%) hue-rotate(283deg) brightness(99%) contrast(87%);" src="https://cdn-icons-png.flaticon.com/512/7387/7387315.png">Purchased history</a></li>
                     <li class="border-y-2"><button on:click={signOut}><img class="h-4" style="filter: invert(21%) sepia(91%) saturate(6843%) hue-rotate(358deg) brightness(98%) contrast(98%);" src="https://cdn-icons-png.flaticon.com/512/2961/2961937.png">Log out</button></li>
                 </ul>
             </div>
@@ -56,7 +57,8 @@
                 <label for="my-modal-4" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"/></label>
             </div>
             {/if}
-            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" /></a>
+            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" />
+            </a>
         </div>
     </div>
 </nav>
