@@ -1,5 +1,5 @@
 <script>
-    import { goto } from '$app/navigation';
+     import { goto } from '$app/navigation';
 	import { PUBLIC_BASE_URL } from '$env/static/public';
     import { getTokenFromLocalStorage } from '../../../utils/auth'
     import { uploadMedia } from '../../../utils/s3-uploader'
@@ -10,6 +10,8 @@
 	// import Header from '../../components/common/+header.svelte';
 	// import Layout from '../+layout.svelte';
 
+    export let data
+
     let input;
     let images = [];
     let evtImages = [];
@@ -18,7 +20,8 @@
         function postProduct() {
             goto('/');
         }
-
+    
+        console.log(data)
         //go to my listing page
 
 async function createProduct(evt) {
@@ -92,62 +95,73 @@ const remove = (image) => {
   <script src="/aws-sdk-s3.min.js"></script>
 </svelte:head>
 
-<div class="pl-40 pr-40">
-    <h1 class="text-2xl mt-4 font-bold">
+<div class="pl-40 pr-40 my-10 font-shantell-sans">
+    <h1 class="text-4xl mt-4 text-center font-shantell-sans">
         Add Product
     </h1>
     <form on:submit={createProduct} class="w-full">
-        <div>
-            <div class="mt-2 text-sm py-2 px-1">Product Images</div>
-            <input bind:this={input} name="file" type="file" id="select-image" class="hidden" multiple on:change={onChange}/>
-            {#if images.length > 0}
-                <div id="images" class="flex justify-center">
-                    {#each images as image}
-                        <div class="mr-4 relative">
-                             <img class="h-20" src={image.url} alt="product" />
-                             <div class="transition ease-in-out duration-300 absolute left-0 top-0 right-0 bottom-0 opacity-0 bg-black100 h-full w-full  hover:opacity-100">
-                                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                    <button on:click={() => remove(image)}>
-                                        <Icon data={trash} fill="white" />
-                                    </button>
-                                   
-                                </div>
-                                
-                              </div>
-                        </div>
-                       
-                    {/each}
-                </div>
+
+        <div class="flex py-1">
+            <div class="w-2/3">
+                <div class="form-control">
+                <label class="label label-text text-base" for="productname">Product Name</label>
+                <input
+                    type="text"
+                    name="productname"
+                    placeholder=""
+                    class="input input-bordered border-rose300 rounded-3xl"
+                />
+                {#if 'productname' in formErrors}
+                    <label class="label" for="productname">
+                        <span class="label-text-alt text-red-500">{formErrors['productname']}</span>
+                    </label>
                 {/if}
-            <label class="btn btn-md bg-rose300 border-rose300 hover:bg-rose400 hover:border-rose400 rounded-3xl" for="select-image">
-                Choose Images
-            </label>
-            <p class="text-xs"><span id="total-images">{totalImages}</span> File(s) Selected</p>
-            {#if 'image' in formErrors}
-                <label class="label" for="image">
-                    <span class="label-text-alt text-red-500">{formErrors['image']}</span>
+            </div>
+    
+            <div class="py-1">
+                <div class="mt-2 py-2 px-1 text-base "></div>
+                <input bind:this={input} name="file" type="file" id="select-image" class="hidden" multiple on:change={onChange}/>
+                {#if images.length > 0}
+                    <div id="images" class="flex justify-center">
+                        {#each images as image}
+                            <div class="mr-4 relative">
+                                 <img class="h-20" src={image.url} alt="product" />
+                                 <div class="transition ease-in-out duration-300 absolute left-0 top-0 right-0 bottom-0 opacity-0 bg-black100 h-full w-full  hover:opacity-100">
+                                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                        <button on:click={() => remove(image)}>
+                                            <Icon data={trash} fill="white" />
+                                        </button>
+                                       
+                                    </div>
+                                    
+                                  </div>
+                            </div>
+                           
+                        {/each}
+                    </div>
+                    {/if}
+                <label class="btn btn-md bg-rose300 border-rose300 hover:bg-rose400 hover:border-rose400 rounded-3xl" for="select-image">
+                    Choose Images
                 </label>
-            {/if}
+                <p class="text-xs pl-5 pt-1"><span id="total-images">{totalImages}</span> File(s) Selected</p>
+                {#if 'image' in formErrors}
+                    <label class="label" for="image">
+                        <span class="label-text-alt text-red-500">{formErrors['image']}</span>
+                    </label>
+                {/if}
+            </div>
+            </div>
         </div>
 
-        <div class="form-control w-full">
-            <label class="label label-text" for="productname">Product Name</label>
-            <input
-                type="text"
-                name="productname"
-                placeholder=""
-                class="input input-bordered border-rose300 rounded-3xl"
-            />
-            {#if 'productname' in formErrors}
-                <label class="label" for="productname">
-                    <span class="label-text-alt text-red-500">{formErrors['productname']}</span>
-                </label>
-            {/if}
-        </div>
+        
 
-        <div class="grid grid-cols-2 w-full">
+        
+
+        
+
+        <div class="grid grid-cols-2 w-full py-1">
             <div class="pr-6">
-                <label class="label label-text" for="category">Category</label>
+                <label class="label label-text text-base" for="category">Category</label>
                     <select name="category" class="select select-bordered border-rose300 rounded-3xl w-full max-w-lg">
                         <option value="" disabled selected>Pick your category</option>
                         <option value="Dogs">Dogs</option>
@@ -161,7 +175,7 @@ const remove = (image) => {
             </div>
             
             <div class="pl-6">
-                <label class="label label-text" for="condition">Condition</label>
+                <label class="label label-text text-base" for="condition">Condition</label>
                     <select name="condition" class="select select-bordered border-rose300 rounded-3xl w-full max-w-xl">
                         <option value="" disabled selected>Pick your condition</option>
                         <option value="New">New</option>
@@ -176,9 +190,9 @@ const remove = (image) => {
             
         </div> 
 
-        <div class="grid grid-cols-2 w-full">
+        <div class="grid grid-cols-2 w-full py-1">
             <div class="pr-6">
-                <label class="label label-text " for="price">Price</label>
+                <label class="label label-text text-base" for="price">Price</label>
                 <label class="input-group rounded-3xl">
                     <span class='bg-rose300 rounded-3xl'>RM</span>
                     <input
@@ -197,8 +211,8 @@ const remove = (image) => {
                 {/if}
             </div>
 
-            <div class="pl-6">
-                <label class="label label-text " for="stock">Stock</label>
+            <div class="pl-6 ">
+                <label class="label label-text text-base " for="stock">Stock</label>
                 <label class="input-group">
                     <span class='bg-rose300 rounded-3xl'>Unit</span>
                     <input
@@ -218,8 +232,8 @@ const remove = (image) => {
         </div>
         
 
-        <div class="form-control w-full">
-            <label class="label label-text" for="description">Description</label>
+        <div class="form-control w-full py-1">
+            <label class="label label-text text-base" for="description">Description</label>
             <textarea
                 name="description"
                 placeholder=""
@@ -238,6 +252,8 @@ const remove = (image) => {
 
     </form>
 </div>
+
+
 
 
 

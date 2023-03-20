@@ -12,13 +12,47 @@
     margin-right: 30px;
    }
 
+   #myorder img{
+    
+    border-radius: 5px;
+    margin-right: 30px;
+   }
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer>
     import { page } from '$app/stores'
-    import { afterNavigate} from '$app/navigation'
+    import { afterNavigate, invalidate } from '$app/navigation'
+    import { PUBLIC_BASE_URL } from '$env/static/public';
+    import { getTokenFromLocalStorage } from '../../utils/auth'
+    
+    
+
+
+
+    // import { goto } from '$app/navigation';
+
+    export let data
+    
+    //delete product function
+    async function deleteProduct(id) {
+        const res = await fetch(PUBLIC_BASE_URL + `/products/mylisting/${id}`, {
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+      })    
+      console.log(res)
+      if (res.status == 200){
+        await invalidate(PUBLIC_BASE_URL + '/users')
+      } else {
+        const resp = await res.json()
+      }
+    }
+    
+
     let listingTab = false
-    let orderTab = false
+    let orderTab = true
     let accountTab = false
     let purchaseHistoryTab = false
     afterNavigate(() => { 
@@ -32,6 +66,7 @@
         }
     })
 
+    console.log(data)
 
 const handleTab = (action) => {
             if (action === 'listing'){
@@ -58,8 +93,15 @@ const handleTab = (action) => {
              
 }
 
-</script>
+//get sign-up-date
+const d = new Date(data.data.createdAt)
+let signUpDate = (d.toLocaleDateString('pt-PT'))
 
+
+</script>
+<svelte:head>
+  <script src="/aws-sdk-s3.min.js"></script>
+</svelte:head>
 
 
 
@@ -77,21 +119,19 @@ const handleTab = (action) => {
                             src="https://images.unsplash.com/photo-1587402092301-725e37c70fd8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3V0ZSUyMGRvZ3xlbnwwfHwwfHw%3D&w=1000&q=80"
                             alt="dog">
                     </div>
-                    <h1 class="text-gray-900 font-shantell-sans font-bold text-xl leading-8 my-1">HELLO John Dog</h1>
+                    <h1 class="text-gray-900 font-shantell-sans font-bold text-3xl leading-8 text-center my-5">Hello {data.data.name}</h1>
                     <!-- <h3 class="text-gray-600 font-lg text-semibold leading-6">Rating: 4.5/5</h3> -->
-                    <p class="text-sm text-gray-500 font-rokkitt hover:text-gray-600 leading-6">(DESCRIPTION)Lorem ipsum dolor sit amet
+                    <!-- <p class="text-sm text-gray-500 font-rokkitt hover:text-gray-600 leading-6">(DESCRIPTION)Lorem ipsum dolor sit amet
                         consectetur adipisicing elit.
-                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+                        Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p> -->
                     <ul
                         class="bg-rose100 border-white font-shantell-sans text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
-                            <span>Rating</span>
-                            <span class="ml-auto"><span
-                                    class="bg-rose300 py-1 px-2 rounded text-white text-sm">4.5 / 5</span></span>
+                            <span>Member since</span>
+                            <span class="ml-auto">{signUpDate}</span>
                         </li>
                         <li class="flex items-center py-3">
-                            <span>Member since</span>
-                            <span class="ml-auto">Nov 07, 2016</span>
+                            <span class="flex">Posted <div class="flex justify-center text-bold bg-rose200 mx-2 px-2">5</div> products</span>
                         </li>
                     </ul>
                 </div>
@@ -117,94 +157,79 @@ const handleTab = (action) => {
             </div>
                 {#if listingTab}
 
-                <div class="heading">
+                <div class="flex heading">
                     <h1 class="w-full flex item-center justify-center text-3xl py-8">My Listing</h1>
+                    <a href="/products/new" class="btn flex item-center justify-center mt-6 mx-8 bg-rose300 hover:bg-rose400 hover:border-gray100 text-3xl border-gray100">+</a>
                 </div>
                 
                 <div id="mylisting" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-sm  text-gray-700 uppercase bg-rose100">
                             <tr>
-                                <th scope="col" class="px-6 py-5">
+                                <th scope="col" class="w-1/2 px-6 py-5">
                                     Product Info
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="text-center px-6 py-3">
                                     Category
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="text-center px-6 py-3">
                                     Stock
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="text-center px-6 py-3">
                                     Price
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="text-center px-6 py-3">
                                     <span class="sr-only">Edit</span>
                                 </th>
                             </tr>
                         </thead>
+                        {#each data.data.products as listing}
                         <tbody>
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                    Cat cookie 123
+                                <th scope="row" class="flex truncate items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <img src={listing?.images[0]?.url} class="w-full object-contain h-60" alt="listing photo">
+                                    {listing.title}
                                 </th>
-                                <td class="px-6 py-4">
-                                    cat
+                                <td class=" text-center px-6 py-4">
+                                    {listing.category}
                                 </td>
-                                <td class="px-6 py-4">
-                                    12
+                                <td class="text-center px-6 py-4">
+                                    {listing.stock}
                                 </td>
-                                <td class="px-6 py-4">
-                                    RM10
+                                <td class="text-center px-6 py-4">
+                                    {listing.price}
                                 </td>
-                                <td class="px-6 py-4 text-left">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                <td class="text-center px-6 py-4 text-left">
+                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Edit</a>
+                                    <!-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</a> -->
+                                    <button on:click={() => deleteProduct(listing.id)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</button>
 
                                 </td>
                             </tr>
-                            <tbody>
+                            <!-- <tbody>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <th scope="row" class="flex truncate items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
                                         Cat cookie 123
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td class=" text-center px-6 py-4">
                                         cat
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="text-center px-6 py-4">
                                         12
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="text-center px-6 py-4">
                                         RM10
                                     </td>
-                                    <td class="px-6 py-4 text-left">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                    <td class="text-center px-6 py-4 text-left">
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Edit</a>
+                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</a>
     
                                     </td>
-                                </tr>
-                                <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="https://images.notquitenigella.com/images/dog-cookies-easy/__doggy-cookies-12.jpg" alt="">
-                                            dog cookie 123
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            dog
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            20
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            RM12
-                                        </td>
-                                        <td class="px-6 py-4 text-left">
-                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
-                                        </td>
-                                    </tr>
+                                </tr> -->
+                            
                                 </tbody>
+                                {/each}
                             </table>
                         </div>
                   
@@ -213,102 +238,7 @@ const handleTab = (action) => {
                 {/if}
         
                 {#if purchaseHistoryTab}
-                <!-- <div id="order" class="mb-80">
-                    <div class="heading">
-                        <h1 class="w-full flex item-center justify-center text-3xl py-8">Purchased History</h1>
-                    </div>
-                    <div class="order-container font-roboto">
-                        <div class="order-table">
-                            <div class="table-head w-full bg-rose100 border border-gray-200 rounded-lg grid md:grid-cols-3">
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Order number</span>
-                                    <span class="font-light text-gray-500">ABC1234</span>
-                                </div>
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Date placed</span>
-                                    <span class="font-light text-gray-500">15 March, 2023</span>
-                                </div>
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Total amount</span>
-                                    <span class="font-light text-gray-500">RM50.90</span>
-                                </div>
-                            </div>
-                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://www.tasteofhome.com/wp-content/uploads/2018/12/Peanut-Butter-Dog-Treats.-Coconut-Oil-Dog-Treats.-Live-Laugh-Rowe.jpg" alt="">
-                                <div class="w-full flex justify-between">
-                                    <div>
-                                        <div class="px-5 font-bold text-l">Paws shape cookies</div>
-                                        <div class="px-5 font-light text-gray-500">seller's name</div>
-                                    </div>
-                                    <div>Quantity : 1</div>
-                                    <div class="px-10">RM20.90</div>
-                                </div>
-                            </div>
-                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://i.pinimg.com/originals/f4/e3/17/f4e31741fb9dcb50372a942665c407a4.jpg" alt="">
-                                <div class="w-full flex justify-between">
-                                    <div>
-                                        <div class="px-5 font-bold text-l">dog shape cookies</div>
-                                        <div class="px-5 font-light text-gray-500">seller's name</div>
-                                    </div>
-                                    <div>Quantity : 1</div>
-                                    <div class="px-10">RM15.00</div>
-                                </div>
-                            </div>
-                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                <div class="w-full flex justify-between">
-                                    <div>
-                                        <div class="px-5 font-bold text-l">cat shape cookies</div>
-                                        <div class="px-5 font-light text-gray-500">seller's name</div>
-                                    </div>
-                                    <div>Quantity : 1</div>
-                                    <div class="px-10">RM15.00</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-container font-roboto pt-10">
-                        <div class="order-table">
-                            <div class="table-head w-full bg-rose100 border border-gray-200 rounded-lg grid md:grid-cols-3">
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Order number</span>
-                                    <span class="font-light text-gray-500">ABC1232</span>
-                                </div>
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Date placed</span>
-                                    <span class="font-light text-gray-500">10 March, 2023</span>
-                                </div>
-                                <div class="flex flex-col items-center justify-center py-4">
-                                    <span class="text-xl font-bold">Total amount</span>
-                                    <span class="font-light text-gray-500">RM60.00</span>
-                                </div>
-                            </div>
-                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://www.cake2therescue.com.au/wp-content/uploads/2020/05/caviler-king-charles-dog-birthday-cake-kit-cake-2-the-rescue.jpg" alt="">
-                                <div class="w-full flex justify-between">
-                                    <div>
-                                        <div class="px-5 font-bold text-l">Dog birthday cake</div>
-                                        <div class="px-5 font-light text-gray-500">seller's name</div>
-                                    </div>
-                                    <div>Quantity : 1</div>
-                                    <div class="px-10">RM30.00</div>
-                                </div>
-                            </div>
-                            <div class="orders flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w">
-                                <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src="https://boulderlocavore.com/wp-content/uploads/2015/03/How-to-Make-a-Grumpy-Cat-Cake-BoulderLocavore.com-986.jpg" alt="">
-                                <div class="w-full flex justify-between">
-                                    <div>
-                                        <div class="px-5 font-bold text-l">Cat birthday cake</div>
-                                        <div class="px-5 font-light text-gray-500">seller's name</div>
-                                    </div>
-                                    <div>Quantity : 1</div>
-                                    <div class="px-10">RM30.00</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+    
 
                 <div class="heading">
                     <h1 class="w-full flex item-center justify-center text-3xl py-8">Purchase History</h1>
@@ -418,23 +348,69 @@ const handleTab = (action) => {
 
                 {#if orderTab}
                 
-                <div>This is a order tab</div>            
-                  
+                <div class="heading">
+                    <h1 class="w-full flex item-center justify-center text-3xl py-8">My Orders</h1>
+                </div>
+                
+                <div id="myorder" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-center text-gray-500">
+                        <thead class="text-sm  text-gray-700 uppercase bg-rose100">
+                            <tr>
+                                <th scope="col" class="w-1/6 px-6 py-5">
+                                    Product 
+                                </th>
+                                <th scope="col" class="w-1/6 px-6 py-3">
+                                    Order number
+                                </th>
+                                <th scope="col" class="w-1/6 px-6 py-3">
+                                    Quantity
+                                </th>
+                                <th scope="col" class="w-1/6 px-6 py-3">
+                                    Total price
+                                </th>
+                                <th scope="col" class="w-2/6 px-6 py-3">
+                                    Buyer's information
+                                </th>
+                                <!-- <th scope="col-2" class="w-2/5 px-6 py-3">
+                                    <span class="sr-only">Buyer's address</span>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white text-center border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                    <div class="text-center text-base text-bold truncate pb-2">Cat cookies</div>
+                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
+                                </th>
+                                <td class="px-6 py-4">
+                                    ABC1234
+                                </td>
+                                <td class="px-6 py-4">
+                                    2
+                                </td>
+                                <td class="px-6 py-4">
+                                    RM30
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div>Amy</div>
+                                    <div>+60112345678</div>
+                                    <div>Skyville 8 @ Benteng, 439, Jln Klang Lama, 58000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</div>
+                                </td>
+                                <!-- <td class="px-6 py-4 text-left">
+                                </td> -->
+                            </tr>
+                            
+                                </tbody>
+                            </table>
+                        </div>                  
                 
                 {/if}
 
                 {#if accountTab}
                 
                 <div class="bg-white p-3 shadow-sm rounded-sm ">
-                    <div class="w-full flex justify-around items-center space-x-4 pb-6 pt-6 text-gray-900 leading-8">
-                        
-                        <span class="flex tracking-wide text-3xl">
-                            General Information
-                        </span>
-                        <div class="">
-                                <!-- <span class="bg-rose300 rounded text-white">EDIT</span> -->
-                                <button type="button" class="text-white bg-rose300 hover:bg-rose100 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">EDIT</button>
-                        </div>
+                    <div class="heading">
+                        <h1 class="w-full flex item-center justify-center text-3xl py-8">My Account</h1>
                     </div>
                     
                     <div class="text-gray-700 border pt-10">
@@ -447,22 +423,22 @@ const handleTab = (action) => {
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 pl-10 font-semibold">Name</div>
-                                <div class="px-4 py-2 pt-0 pl-10">John Dog</div>
+                                <div class="px-4 py-2 pt-0 pl-10">{data.data.name}</div>
                             </div>
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold">Email</div>
                                 <div class="px-4 py-2 pt-0">
-                                    <a class="text-blue-800" href="mailto:jane@example.com">jane@example.com</a>
+                                    <a class="text-blue-800" href="mailto:jane@example.com">{data.data.email}</a>
                                 </div>
                             </div>
-                            <div class="pb-6">
+                            <!-- <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold pl-10">Password</div>
                                 <div class="px-4 py-2 pt-0 pl-10">********</div>
-                            </div>
-                            <div class="pb-6">
+                            </div> -->
+                            <!-- <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold">Birthday</div>
                                 <div class="px-4 py-2 pt-0">Feb 06, 1998</div>
-                            </div>
+                            </div> -->
                             <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold pl-10">Gender</div>
                                 <div class="px-4 py-2 pt-0 pl-10">Female</div>
@@ -471,10 +447,10 @@ const handleTab = (action) => {
                                 <div class="px-4 py-2 pb-1 font-semibold">Contact No.</div>
                                 <div class="px-4 py-2 pt-0">+60123456789</div>
                             </div>
-                            <div class="pb-6">
+                            <!-- <div class="pb-6">
                                 <div class="px-4 py-2 pb-1 font-semibold pl-10">Description</div>
                                 <div class="px-4 py-2 pt-0 pl-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quas nulla repellendus assumenda vitae dolor neque quia id quidem hic facere illo accusamus tempore consequuntur esse, repellat aut reiciendis omnis.</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
