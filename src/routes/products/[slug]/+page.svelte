@@ -2,20 +2,16 @@
     import { PUBLIC_BASE_URL } from '$env/static/public';
     import {cart} from '../../../utils/context'
     import { goto } from '$app/navigation';
-
     export let data;
     let count = 1;
-
     const add = () => {
         count = count + 1
     }
-
     const subtract = () => {
         if (count > 1){
             count = count - 1
         }
     }
-
     const addToCart = () => {
         if ($cart.length > 0 && $cart.some((item) => item.data.id === data.data.id )){
             const index = $cart.findIndex((item) => item.data.id === data.data.id)
