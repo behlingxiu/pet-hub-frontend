@@ -2,18 +2,20 @@
 
    #mylisting img{
     width: 25%;
+    height: 90%;
     border-radius: 5px;
     margin-right: 30px;
    }
     
    #purchaseHistory img{
     width: 25%;
+    height: 90%;
     border-radius: 5px;
     margin-right: 30px;
    }
 
    #myorder img{
-    
+    height: 90%;
     border-radius: 5px;
     margin-right: 30px;
    }
@@ -25,6 +27,7 @@
     import { afterNavigate, invalidate } from '$app/navigation'
     import { PUBLIC_BASE_URL } from '$env/static/public';
     import { getTokenFromLocalStorage } from '../../utils/auth'
+	import { each } from 'svelte/internal';
     
     
 
@@ -53,15 +56,13 @@
 
     let listingTab = false
     let orderTab = true
-    let accountTab = false
     let purchaseHistoryTab = false
     afterNavigate(() => { 
-        accountTab = $page.url.searchParams.has('account')
         listingTab = $page.url.searchParams.has('listings')
         orderTab = $page.url.searchParams.has('orders')
         purchaseHistoryTab = $page.url.searchParams.has('purchase')
 
-        if (accountTab === false && listingTab === false && orderTab === false && purchaseHistoryTab === false){
+        if (listingTab === false && orderTab === false && purchaseHistoryTab === false){
             listingTab = true
         }
     })
@@ -72,20 +73,12 @@ const handleTab = (action) => {
             if (action === 'listing'){
                 listingTab = true;
                 purchaseHistoryTab = false
-                accountTab = false
                 orderTab = false
             } else if (action === 'purchaseHistory'){
                 purchaseHistoryTab = true;
                 listingTab = false
-                accountTab = false
-                orderTab = false
-            } else if (action === 'account'){
-                accountTab = true;
-                listingTab = false
-                purchaseHistoryTab = false
                 orderTab = false
             } else if (action === 'order'){
-                accountTab = false;
                 listingTab = false
                 purchaseHistoryTab = false
                 orderTab = true
@@ -94,9 +87,15 @@ const handleTab = (action) => {
 }
 
 //get sign-up-date
-const d = new Date(data.data.createdAt)
+let d = new Date(data.data.createdAt)
 let signUpDate = (d.toLocaleDateString('pt-PT'))
 
+
+//get order date 
+// const date = new Date(data.data.order_detail.createdAt)
+// let orderDate = (date.toLocaleDateString('pt-PT'))
+
+// ((new Date(purchaseHistory.createdAt)).toLocaleDateString('pt-PT'))
 
 </script>
 <svelte:head>
@@ -127,12 +126,18 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                     <ul
                         class="bg-rose100 border-white font-shantell-sans text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
-                            <span>Member since</span>
-                            <span class="ml-auto">{signUpDate}</span>
+                            <span class="w-1/2">Name</span>
+                            <span class="ml-auto truncate w-1/2 text-left">{data.data.name}</span>
                         </li>
                         <li class="flex items-center py-3">
-                            <span class="flex">Posted <div class="flex justify-center text-bold bg-rose200 mx-2 px-2">5</div> products</span>
+                            <span class="w-1/2">Email</span>
+                            <span class="ml-auto truncate w-1/2 text-left">{data.data.email}</span>
                         </li>
+                        <li class="flex items-center py-3">
+                            <span class="w-1/2">Member since</span>
+                            <span class="ml-auto w-1/2 truncate text-left">{signUpDate}</span>
+                        </li>
+
                     </ul>
                 </div>
                 <!-- End of profile card -->
@@ -148,10 +153,9 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
 
 
             <div class="tabs font-shantell-sans">
-                <button on:click={() => handleTab('listing')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (listingTab ? " tab-active" : " bg-rose100")}>My Listing</button> 
-                <button on:click={() => handleTab('purchaseHistory')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (purchaseHistoryTab ? " tab-active" : " bg-rose100")}>Purchased History</button> 
-                <button on:click={() => handleTab('order')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (orderTab ? " tab-active" : " bg-rose100")}>My Orders</button> 
-                <button on:click={() => handleTab('account')} class={"tab tab-lifted w-1/4 h-16 text-lg" + (accountTab ? " tab-active" : " bg-rose100")}>My Account</button> 
+                <button on:click={() => handleTab('listing')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (listingTab ? " tab-active" : " bg-rose100")}>My Listing</button> 
+                <button on:click={() => handleTab('purchaseHistory')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (purchaseHistoryTab ? " tab-active" : " bg-rose100")}>Purchased History</button> 
+                <button on:click={() => handleTab('order')} class={"tab tab-lifted w-1/3 h-16 text-lg" + (orderTab ? " tab-active" : " bg-rose100")}>My Orders</button> 
 
 
             </div>
@@ -166,7 +170,7 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-sm  text-gray-700 uppercase bg-rose100">
                             <tr>
-                                <th scope="col" class="w-1/2 px-6 py-5">
+                                <th scope="col" class="w-1/3 px-6 py-5">
                                     Product Info
                                 </th>
                                 <th scope="col" class="text-center px-6 py-3">
@@ -185,9 +189,9 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                         </thead>
                         {#each data.data.products as listing}
                         <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex truncate items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <img src={listing?.images[0]?.url} class="w-full object-contain h-60" alt="listing photo">
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 ">
+                                <th scope="row" class="flex truncate items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white h-40 mx-3" >
+                                    <img src={listing?.images[0]?.url} class="w-full object-contain h-32" alt="listing photo">
                                     {listing.title}
                                 </th>
                                 <td class=" text-center px-6 py-4">
@@ -197,37 +201,14 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                                     {listing.stock}
                                 </td>
                                 <td class="text-center px-6 py-4">
-                                    {listing.price}
+                                    RM {(listing.price).toFixed(2)}
                                 </td>
                                 <td class="text-center px-6 py-4 text-left">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Edit</a>
-                                    <!-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</a> -->
+                                    <!-- <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Edit</a> -->
                                     <button on:click={() => deleteProduct(listing.id)} class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</button>
 
                                 </td>
                             </tr>
-                            <!-- <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row" class="flex truncate items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                        Cat cookie 123
-                                    </th>
-                                    <td class=" text-center px-6 py-4">
-                                        cat
-                                    </td>
-                                    <td class="text-center px-6 py-4">
-                                        12
-                                    </td>
-                                    <td class="text-center px-6 py-4">
-                                        RM10
-                                    </td>
-                                    <td class="text-center px-6 py-4 text-left">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Edit</a>
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline px-2">Delete</a>
-    
-                                    </td>
-                                </tr> -->
-                            
                                 </tbody>
                                 {/each}
                             </table>
@@ -243,104 +224,49 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                 <div class="heading">
                     <h1 class="w-full flex item-center justify-center text-3xl py-8">Purchase History</h1>
                 </div>
+
+                {#each data.data.order_detail as purchaseHistory}
                 
-                <div id="purchaseHistory" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg my-">
+                <div id="purchaseHistory" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg my-4">
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-sm text-gray-700 uppercase bg-rose100">
                             <tr class="">
                                 <th scope="col" class="text-center px-6 py-5 w-1/3">
                                     <div class="text-base font-semibold ">Order number</div>
-                                    <div> ABC1234</div>
+                                    <div> {purchaseHistory.id}</div>
                                 </th>
                                 <th scope="col" class="text-center px-6 py-5 w-1/3">
                                     <div class="text-base font-semibold ">Dated placed</div>
-                                    <div> 15 March, 2023</div>
+                                    <div> {((new Date(purchaseHistory.createdAt)).toLocaleDateString('pt-PT'))}</div>
                                 </th>
                                 <th scope="col" class="text-center px-6 py-5 w-1/3">
                                     <div class="text-base font-semibold ">Total amount</div>
-                                    <div> RM20.00</div>
+                                    <div> RM {((purchaseHistory.payment[0]?.amount)/100).toFixed(2)}</div>
                                 </th>
                             </tr>
                         </thead>
+                        {#each purchaseHistory.order_item as orderItem}
                         <tbody>
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                    Cat cookie 123
+                                <th scope="row" class="flex items-center py-4 font-medium text-gray-900 h-32 mx-3">
+                                    <img src={orderItem.product.images[0]?.url} class="w-full object-contain h-32" alt="listing photo">
+                                    <div>
+                                        <div>{orderItem.product.title}</div>
+                                        <div class="text-xs text-gray-500 font-light pt-1">{orderItem.product.user.name}</div>
+                                    </div>
                                 </th>
                                 <td class="px-6 py-4 w-1/3 text-center">
-                                    Quantity : 1
+                                    Quantity : {orderItem.quantity}
                                 </td>
                                 <td class="px-6 py-4 w-1/3 text-center">
-                                    RM20.00
-                                </td>
+                                    RM {((orderItem.product.price)).toFixed(2)}                                </td>
                             </tr>
                             <tbody>
                         </tbody>
+                        {/each}
                     </table>
                 </div>
-                <div id="purchaseHistory" class="font-roboto relative overflow-x-auto shadow-md sm:rounded-lg my-3">
-                    <table class="w-full text-sm text-left text-gray-500">
-                        <thead class="text-sm text-gray-700 uppercase bg-rose100">
-                            <tr class="">
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
-                                    <div class="text-base font-semibold ">Order number</div>
-                                    <div> ABC1234</div>
-                                </th>
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
-                                    <div class="text-base font-semibold ">Dated placed</div>
-                                    <div> 15 March, 2023</div>
-                                </th>
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
-                                    <div class="text-base font-semibold ">Total amount</div>
-                                    <div> RM20.00</div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                    Cat cookie 123
-                                </th>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    Quantity : 1
-                                </td>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    RM20.00
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                    Cat cookie 123
-                                </th>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    Quantity : 1
-                                </td>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    RM20.00
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900">
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                    Cat cookie 123
-                                </th>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    Quantity : 1
-                                </td>
-                                <td class="px-6 py-4 w-1/3 text-center">
-                                    RM20.00
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            {/each}
 
                         
                   
@@ -369,100 +295,45 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                                     Total price
                                 </th>
                                 <th scope="col" class="w-2/6 px-6 py-3">
-                                    Buyer's information
+                                    Delivery Address
                                 </th>
                                 <!-- <th scope="col-2" class="w-2/5 px-6 py-3">
                                     <span class="sr-only">Buyer's address</span>
                                 </th> -->
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="bg-white text-center border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                    <div class="text-center text-base text-bold truncate pb-2">Cat cookies</div>
-                                    <img src="http://www.storyofakitchen.com/images/kitty-cookies4.jpg" alt="">
-                                </th>
-                                <td class="px-6 py-4">
-                                    ABC1234
-                                </td>
-                                <td class="px-6 py-4">
-                                    2
-                                </td>
-                                <td class="px-6 py-4">
-                                    RM30
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div>Amy</div>
-                                    <div>+60112345678</div>
-                                    <div>Skyville 8 @ Benteng, 439, Jln Klang Lama, 58000 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</div>
-                                </td>
-                                <!-- <td class="px-6 py-4 text-left">
-                                </td> -->
-                            </tr>
-                            
-                                </tbody>
-                            </table>
-                        </div>                  
+                        {#each data.data.products as products}
+                            {#each products.order_item as order}
+                            <tbody>
+                                <tr class="bg-white text-center border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 h-40 dark:text-white">
+                                        <div class="text-center text-base text-bold truncate pb-2 underline">{products.title}</div>
+                                        <img src={products?.images[0]?.url} class="w-full object-contain h-32" alt="listing photo">
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {order.id}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {order.quantity}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        RM{(products.price)*(order.quantity)}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div>{order.order_detail.receiver}</div>
+                                        <div>+{order.order_detail.contact_number}</div>
+                                        <div>{order.order_detail.shipping_address}</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {/each}
+                        {/each}
+                    </table>
+                </div>                  
                 
                 {/if}
 
-                {#if accountTab}
-                
-                <div class="bg-white p-3 shadow-sm rounded-sm ">
-                    <div class="heading">
-                        <h1 class="w-full flex item-center justify-center text-3xl py-8">My Account</h1>
-                    </div>
-                    
-                    <div class="text-gray-700 border pt-10">
-                        <!-- <div>
-                            <div class="px-4 py-2 pb-1 font-semibold">Profile Picture</div>
-                            <img class="object-scale-down h-48 w-45 px-4 py-2 pt-0"
-                            src="https://images.unsplash.com/photo-1587402092301-725e37c70fd8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y3V0ZSUyMGRvZ3xlbnwwfHwwfHw%3D&w=1000&q=80"
-                            alt="dog">                        
-                        </div> -->
-                        <div class="grid md:grid-cols-2 text-sm">
-                            <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 pl-10 font-semibold">Name</div>
-                                <div class="px-4 py-2 pt-0 pl-10">{data.data.name}</div>
-                            </div>
-                            <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Email</div>
-                                <div class="px-4 py-2 pt-0">
-                                    <a class="text-blue-800" href="mailto:jane@example.com">{data.data.email}</a>
-                                </div>
-                            </div>
-                            <!-- <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Password</div>
-                                <div class="px-4 py-2 pt-0 pl-10">********</div>
-                            </div> -->
-                            <!-- <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Birthday</div>
-                                <div class="px-4 py-2 pt-0">Feb 06, 1998</div>
-                            </div> -->
-                            <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Gender</div>
-                                <div class="px-4 py-2 pt-0 pl-10">Female</div>
-                            </div>
-                            <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold">Contact No.</div>
-                                <div class="px-4 py-2 pt-0">+60123456789</div>
-                            </div>
-                            <!-- <div class="pb-6">
-                                <div class="px-4 py-2 pb-1 font-semibold pl-10">Description</div>
-                                <div class="px-4 py-2 pt-0 pl-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quas nulla repellendus assumenda vitae dolor neque quia id quidem hic facere illo accusamus tempore consequuntur esse, repellat aut reiciendis omnis.</div>
-                            </div> -->
-                        </div>
-                    </div>
                 </div>
-                <!-- End of about section -->
-                {/if}
-
-                <div class="my-4"></div>
-
-                <!-- Experience and education -->
-                
-                </div>
-                <!-- End of profile tab -->
             </div>
         </div>
     
