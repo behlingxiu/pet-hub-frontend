@@ -57,7 +57,7 @@
                 <label for="my-modal-4" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png"/></label>
             </div>
             {/if}
-            <a href="#" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" />
+            <a href="/cart" class=" text-gray-500 dark:text-white hover:bg-rose300 btn btn-ghost right-btn mr-2 text-zinc-300 text-sm"><img class="h-6" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" />
             </a>
         </div>
     </div>
