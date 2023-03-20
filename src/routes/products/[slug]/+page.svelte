@@ -56,6 +56,15 @@
                     <p class="capitalize">{data.data.condition}</p>
                 </div>
             </div>
+            
+            <div class="flex flex-row w-full mt-8">
+                <div class="basis-1/4">
+                    <h2 class="text-gray-500">Category</h2>
+                </div>
+                <div>
+                    <p class="capitalize">{data.data.category}</p>
+                </div>
+            </div>
 
             <div>
                 <form>
