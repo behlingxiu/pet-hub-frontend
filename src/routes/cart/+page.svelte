@@ -3,6 +3,7 @@
     import {goto} from '$app/navigation'
     import { PUBLIC_BASE_URL } from '$env/static/public';
     import { cart } from '../../utils/context'
+    import { alert } from '../../utils/alert'
 	import { getTokenFromLocalStorage } from '../../utils/auth';
 
     let sum = 0.00;
@@ -66,7 +67,8 @@ const createOrder = async () => {
     if (resp.status === 200){
        payment(res.resp.order_detail[0].id)
     } else {
-       formError = res.error
+     formError = res.error
+    //    alert.setAlert('Please sign up/ log in first', 'error')
     }
 }
 

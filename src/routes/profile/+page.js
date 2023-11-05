@@ -1,5 +1,5 @@
 import { PUBLIC_BASE_URL } from '$env/static/public';
-import { getTokenFromLocalStorage } from '../../../../../../../../Users/teohwenweiesmond/Desktop/PetHub/pet-hub-frontend/src/utils/auth';
+import { getTokenFromLocalStorage } from '../../utils/auth'
 
 // export async function load({ fetch, params }) {
 //     const resp = await fetch(PUBLIC_BASE_URL + `/products/${params.slug}`);

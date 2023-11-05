@@ -90,7 +90,7 @@
                                         <div class="truncate card-title capitalize text-lg">
                                             {product.title}
                                         </div>
-                                        <div class="text-xl text-rose400 text-start font-bold">RM{product.price}</div>
+                                        <div class="text-xl text-rose400 text-start font-bold">RM{(product.price).toFixed(2)}</div>
                                         <!-- <div class="des relative">
                                             <span class="absolute right-1 font-shantell-sans">{product.category}</span>
                                             <h5 class="truncate pt-5 pb-2 text-xl font-semibold capitalize">{product.title}</h5>
@@ -107,4 +107,3 @@
                     </div>
     </section>
 </div>
-
