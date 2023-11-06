@@ -98,12 +98,10 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
 // ((new Date(purchaseHistory.createdAt)).toLocaleDateString('pt-PT'))
 
 </script>
+
 <svelte:head>
   <script src="/aws-sdk-s3.min.js"></script>
 </svelte:head>
-
-
-
 
     <!-- End of Navbar -->
 
@@ -231,17 +229,20 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-sm text-gray-700 uppercase bg-rose100">
                             <tr class="">
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                <th scope="col" class="text-center px-6 py-5 w-1/4">
                                     <div class="text-base font-semibold ">Order number</div>
                                     <div> {purchaseHistory.id}</div>
                                 </th>
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                <th scope="col" class="text-center px-6 py-5 w-1/4">
                                     <div class="text-base font-semibold ">Dated placed</div>
                                     <div> {((new Date(purchaseHistory.createdAt)).toLocaleDateString('pt-PT'))}</div>
                                 </th>
-                                <th scope="col" class="text-center px-6 py-5 w-1/3">
+                                <th scope="col" class="text-center px-6 py-5 w-1/4">
                                     <div class="text-base font-semibold ">Total amount</div>
-                                    <div> RM {((purchaseHistory.payment[0]?.amount)/100).toFixed(2)}</div>
+                                    <div> RM {(((purchaseHistory.payment[0]?.amount))/100).toFixed(2)}</div>
+                                </th>
+                                <th scope="col" class="text-center px-6 py-5 w-1/4">
+                                    <div class="text-base font-semibold p-2 w-30 h-15 text-xs text-right flex justify-center">{purchaseHistory.status}</div>
                                 </th>
                             </tr>
                         </thead>
@@ -259,7 +260,10 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                                     Quantity : {orderItem.quantity}
                                 </td>
                                 <td class="px-6 py-4 w-1/3 text-center">
-                                    RM {((orderItem.product.price)).toFixed(2)}                                </td>
+                                    RM {((orderItem.product.price * orderItem.quantity)).toFixed(2)}
+                                </td>
+                                <td class="px-6 py-4 w-1/3 text-center">
+                                </td>
                             </tr>
                             <tbody>
                         </tbody>
@@ -316,13 +320,16 @@ let signUpDate = (d.toLocaleDateString('pt-PT'))
                                     <td class="px-6 py-4">
                                         {order.quantity}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        RM{(products.price)*(order.quantity)}
+                                    <td class="px-6 py-4"> 
+                                        RM{(products.price * order.quantity).toFixed(2)}
                                     </td>
                                     <td class="px-6 py-4">
                                         <div>{order.order_detail.receiver}</div>
                                         <div>+{order.order_detail.contact_number}</div>
                                         <div>{order.order_detail.shipping_address}</div>
+                                        <div class="pt-4 w-full">
+                                            <div class="border mx-10 bg-gray-200  text-center flex justify-center item-center">{order.order_detail.status}</div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

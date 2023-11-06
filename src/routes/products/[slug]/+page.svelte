@@ -7,6 +7,7 @@
     const add = () => {
         count = count + 1
     }
+
     const subtract = () => {
         if (count > 1){
             count = count - 1
@@ -43,7 +44,7 @@
     
         <div class="basis-1/2">
             <h1 class="text-3xl font-extrabold text-gray-700 capitalize">{data.data.title}</h1>
-            <h1 class="mt-6 text-2xl font-bold text-red-600">RM{data.data.price}</h1>
+            <h1 class="mt-6 text-2xl font-bold text-red-600">RM{(data.data.price).toFixed(2)}</h1>
             <div class="flex flex-row w-full mt-8">
                 <div class="basis-1/4">
                     <h2 class="text-gray-500">Condition</h2>
@@ -85,6 +86,10 @@
 
                         <div class="pl-2 text-gray-500 text-xs">
                             <h3>{data.data.stock} units available</h3>
+                            {#if count > data.data.stock}
+                            <div class="text-red-700">sorry, we don't have enough stocks.</div>
+                            <div class="text-red-700">you can only order {data.data.stock} unit(s).</div>
+                            {/if}
                         </div>
                         
                     </div>

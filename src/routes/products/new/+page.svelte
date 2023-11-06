@@ -95,8 +95,8 @@ const remove = (image) => {
   <script src="/aws-sdk-s3.min.js"></script>
 </svelte:head>
 
-<div class="pl-40 pr-40 my-10 font-shantell-sans">
-    <h1 class="text-4xl mt-4 text-center font-shantell-sans">
+<div class="container mt-3 lg:mt-10 mx-auto px-2 lg:px-20 mb-20">
+    <h1 class="text-2xl mt-4 font-bold">
         Add Product
     </h1>
     <form on:submit={createProduct} class="w-full">

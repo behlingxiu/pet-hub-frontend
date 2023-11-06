@@ -59,7 +59,7 @@
 <div class="container mt-3 lg:mt-10 mx-auto px-2 lg:px-0 mb-20">
     <section id="listing1" class="ml-10 font-roboto" >
         <div class="flex justify-between">
-            <h2 class="font-roboto text-4xl font-semibold py-4 font-shantell-sans">Products</h2>
+            <h2 class="font-roboto text-4xl py-4 font-shantell-sans font-semibold">New</h2>
             <div>
                 <div class="dropdown">
                     <label tabindex="0" class="btn w-40 rounded-full hover:bg-rose200 hover:border-rose200 border-rose400 bg-white text-black m-1">Filter by</label>
@@ -90,7 +90,7 @@
                                         <div class="truncate card-title capitalize text-lg">
                                             {product.title}
                                         </div>
-                                        <div class="text-xl text-rose400 text-start font-bold">RM{(product.price).toFixed(2)}</div>
+                                        <div class="text-xl text-rose400 text-start font-bold">RM{product.price}</div>
                                         <!-- <div class="des relative">
                                             <span class="absolute right-1 font-shantell-sans">{product.category}</span>
                                             <h5 class="truncate pt-5 pb-2 text-xl font-semibold capitalize">{product.title}</h5>
@@ -107,3 +107,4 @@
                     </div>
     </section>
 </div>
+
